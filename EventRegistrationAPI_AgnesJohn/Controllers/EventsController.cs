@@ -22,7 +22,6 @@ namespace EventRegistrationAPI_AgnesJohn.Controllers
         public async Task<ActionResult<List<EventDto>>> GetAll()
         {
             var events = await _eventService.GetAllEventsAsync();
-
             return Ok(events);
         }
 
@@ -38,6 +37,19 @@ namespace EventRegistrationAPI_AgnesJohn.Controllers
             }
 
             return Ok(campusEvent);
+        }
+
+        // POST: api/events
+        [HttpPost]
+        public async Task<ActionResult<EventDto>> Create(
+            CreateEventDto dto)
+        {
+            var campusEvent = await _eventService.CreateEventAsync(dto);
+
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = campusEvent.EventId },
+                campusEvent);
         }
     }
 }

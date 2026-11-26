@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using EventRegistrationAPI_AgnesJohn.Validation;
 
 namespace EventRegistrationAPI_AgnesJohn.DTOs
 {
@@ -13,6 +14,7 @@ namespace EventRegistrationAPI_AgnesJohn.DTOs
         [Required(ErrorMessage = "Location is required.")]
         public string Location { get; set; } = string.Empty;
 
+        [FutureDate(ErrorMessage = "Event date must be in the future.")]
         public DateTime EventDate { get; set; }
 
         [Range(1, 500, ErrorMessage = "Capacity must be between 1 and 500.")]
